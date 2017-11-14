@@ -1,4 +1,4 @@
-class Pony{
+export class Pony{
     constructor(private color: string){
 
     }
