@@ -164,6 +164,11 @@ Decorators: annotations on classes or fields
 
 ## Bootstrap an app
 
+Node.js as a toolset, npm.
+
+angular-cli is standardized
+
+
 ## Component & Templates
 
 ## Dependency Injection
