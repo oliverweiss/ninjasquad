@@ -176,6 +176,50 @@ angular-cli is standardized
 
 ## Tests
 
+Unitaires/end to end
+
+Unit tests:
+Jasmine: API to describe tests, express assertions. Generic API
+Karma: From angular team, execute Jasmine unit tests in a browser from a cli.
+
+Jasmine API
+
+* describe() describe a tests collection
+* it() describe a test
+* expect() describe the expected result of the test
+
+```javascript
+describe('My first test suite', () => {
+    it('should construct a Pony', () => {
+        const pony: Pony = new Pony('Rainbow Dash', 10);
+        expect(pony.name).toBe('Rainbow Dash');
+        expect(pony.speed).toBeGreaterThan(5);
+    });
+});
+```
+
+Mocking: It is preferable in js to take the real object and replace methods with custom implementations.
+
+```javascript
+beforeEach(() => {
+    var pony = new Pony(...);
+    spyOn(...);
+})
+```
+
+Karma:
+Launch a web server with a custom page with all scripts and all tests.
+Launch a browser which loads the page. It execute the tests on the browser, then sends the results to the server.
+The results are then displayed to the CLI.
+
+End to end tests: Protractor
+Selenium: browser pilot
+Protractor: Designed to test angular apps. Useful for async executions.
+
+Slow, harder to debug than UTs.
+Less useful than for angular.js
+
+
 ## Forms/Http/Router
 
 ## l10n/i18n/etc
