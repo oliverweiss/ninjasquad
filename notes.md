@@ -222,4 +222,45 @@ Less useful than for angular.js
 
 ## Forms/Http/Router
 
+2 ways to build a form: Code driven (aka Reactive forms) vs Template driven.
+
+Object model is the same in both cases.
+
+Template: form in html
+submit button, subscribe to `(ngSubmit)`
+
+```javascript
+<form (ngSubmit)="onSubmit()" >
+    <button type="submit" />
+</form>
+```
+
+FormControl: state of a control
+
+* valid/invalid
+* pristine/dirty
+* touched/untouched
+* errors
+* value
+* valueChanges => Observable
+* statusChanges => Observable<valid|invalid>
+
+FormControl grouped in a `FormGroup`. `FormGroup`s can be nested
+
+FormGroup value: object with key/values corresponding to formControls.
+
+### Template driven
+
+Import `{ FormsModule }`
+
+Directive `ngModel` as attr of the form => Create a formGroup.
+
+### Code driven
+
+Import `{ ReactiveFormsModule }`
+
+FormBuilder.control()
+
+FormBuilder.group()
+
 ## l10n/i18n/etc
