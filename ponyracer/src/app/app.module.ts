@@ -1,3 +1,5 @@
+import { ROUTES } from './app.routes';
+import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -10,6 +12,7 @@ import { RaceService } from './race.service';
 import { RaceComponent } from './race/race.component';
 import { PonyComponent } from './pony/pony.component';
 import { FromNowPipe } from './from-now.pipe';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -19,11 +22,14 @@ import { FromNowPipe } from './from-now.pipe';
     RacesComponent,
     RaceComponent,
     PonyComponent,
-    FromNowPipe
+    FromNowPipe,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule,
+    RouterModule.forRoot(ROUTES)
   ],
   providers: [RaceService],
   bootstrap: [AppComponent]
