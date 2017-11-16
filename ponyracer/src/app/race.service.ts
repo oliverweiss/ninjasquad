@@ -5,12 +5,14 @@ import 'rxjs/add/observable/of';
 import { RaceModel } from './models/race.model';
 import { Injectable } from '@angular/core';
 
+const BASE_URL = 'http://ponyracer.ninja-squad.com/api';
+
 @Injectable()
 export class RaceService {
   constructor(private httpClient: HttpClient) { }
 
   list(): Observable<Array<RaceModel>> {
     return this.httpClient
-    .get<Array<RaceModel>>('http://ponyracer.ninja-squad.com/api/races', {params: {status: 'PENDING'}});
+    .get<Array<RaceModel>>(`${BASE_URL}/races`, {params: {status: 'PENDING'}});
   }
 }
