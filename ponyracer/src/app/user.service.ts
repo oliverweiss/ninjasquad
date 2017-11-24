@@ -15,9 +15,7 @@ const REMEMBER_ME = 'rememberMe';
 export class UserService {
   userEvents = new BehaviorSubject<UserModel>(undefined);
 
-  constructor(private httpClient: HttpClient,
-    // private jwtInterceptor: JwtInterceptorService
-  ) {
+  constructor(private httpClient: HttpClient, private jwtInterceptor: JwtInterceptorService) {
     this.retrieveUser();
   }
 
