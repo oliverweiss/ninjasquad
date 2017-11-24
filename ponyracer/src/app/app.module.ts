@@ -1,8 +1,9 @@
+import { JwtInterceptorService } from './jwt-interceptor.service';
 import { UserService } from './user.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ROUTES } from './app.routes';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -39,7 +40,12 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [RaceService, UserService],
+  providers: [
+    RaceService,
+    UserService,
+    JwtInterceptorService,
+    {provide: HTTP_INTERCEPTORS, useExisting: JwtInterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
