@@ -8,12 +8,15 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 
 const BASE_URL = 'http://ponyracer.ninja-squad.com/api';
+const REMEMBER_ME = 'rememberMe';
 
 @Injectable()
 export class UserService {
   userEvents = new BehaviorSubject<UserModel>(undefined);
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+    this.retrieveUser();
+  }
 
   register(login, password, birthYear): Observable<UserModel> {
     const body = {login, password, birthYear};
@@ -23,7 +26,19 @@ export class UserService {
   authenticate(credentials: CredentialsModel): Observable<UserModel> {
     return this.httpClient
       .post<UserModel>(`${BASE_URL}/users/authentication`, credentials)
-      .do(user => this.userEvents.next(user));
+      .do(user => this.storeLoggedInUser(user));
+  }
+
+  storeLoggedInUser(user) {
+    window.localStorage.setItem(REMEMBER_ME, JSON.stringify(user));
+    this.userEvents.next(user);
+  }
+
+  retrieveUser() {
+    const json = window.localStorage.getItem(REMEMBER_ME);
+    if (json) {
+      this.userEvents.next(JSON.parse(json));
+    }
   }
 
 }
