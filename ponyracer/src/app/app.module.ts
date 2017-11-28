@@ -1,3 +1,5 @@
+import { WEBSOCKET, WEBSTOMP } from './app.tokens';
+import { WsService } from './ws.service';
 import { JwtInterceptorService } from './jwt-interceptor.service';
 import { UserService } from './user.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -6,7 +8,7 @@ import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import * as Webstomp from 'webstomp-client';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -48,7 +50,10 @@ import { LiveComponent } from './live/live.component';
     RaceService,
     UserService,
     JwtInterceptorService,
-    {provide: HTTP_INTERCEPTORS, useExisting: JwtInterceptorService, multi: true}
+    {provide: HTTP_INTERCEPTORS, useExisting: JwtInterceptorService, multi: true},
+    WsService,
+    { provide: WEBSOCKET, useFactory: () => WebSocket },
+    { provide: WEBSTOMP, useFactory: () => Webstomp }
   ],
   bootstrap: [AppComponent]
 })

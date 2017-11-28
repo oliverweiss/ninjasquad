@@ -1,3 +1,4 @@
+import { WsService } from './ws.service';
 import { PonyModel, PonyWithPositionModel } from './models/pony.model';
 import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -11,17 +12,9 @@ import { RaceModel } from './models/race.model';
 import { Injectable } from '@angular/core';
 
 
-const staticRace: Array<PonyModel> = [
- {id: 1, name: 'Superb Runner', color: 'BLUE' },
- { id: 2, name: 'Awesome Fridge', color: 'GREEN' },
- { id: 3, name: 'Great Bottle', color: 'ORANGE' },
- { id: 4, name: 'Little Flower', color: 'YELLOW' },
- { id: 5, name: 'Nice Rock', color: 'PURPLE'},
-];
-
 @Injectable()
 export class RaceService {
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private wsService: WsService) { }
 
   list(): Observable<Array<RaceModel>> {
     return this.httpClient
@@ -43,9 +36,7 @@ export class RaceService {
   }
 
   live(raceId: number): Observable<Array<PonyWithPositionModel>> {
-    return Observable.interval(1000)
-      .take(101)
-      .map(position => staticRace
-        .map(pony => ({...pony, position: position % 101})));
+    return this.wsService.connect(`/race/${raceId}`)
+      .map(race => race.ponies);
   }
 }
