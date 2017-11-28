@@ -3,10 +3,8 @@ import { PonyModel, PonyWithPositionModel } from './models/pony.model';
 import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/takeWhile';
 
 import { RaceModel } from './models/race.model';
 import { Injectable } from '@angular/core';
@@ -37,6 +35,7 @@ export class RaceService {
 
   live(raceId: number): Observable<Array<PonyWithPositionModel>> {
     return this.wsService.connect(`/race/${raceId}`)
+      .takeWhile(race => race.status !== 'FINISHED')
       .map(race => race.ponies);
   }
 }

@@ -5,6 +5,6 @@ export interface RaceModel {
     ponies: Array<PonyModel>;
     id: number;
     startInstant: string;
-    status?: string;
+    status?: 'PENDING' | 'RUNNING' | 'FINISHED';
     betPonyId?: number;
 }
