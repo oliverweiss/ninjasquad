@@ -16,12 +16,17 @@ export class RaceService {
       .get<Array<RaceModel>>(`${environment.baseUrl}/api/races`, {params: {status: 'PENDING'}});
   }
 
+  get(raceId: number): Observable<RaceModel> {
+    return this.httpClient.get<RaceModel>(`${environment.baseUrl}/api/races/${raceId}`);
+  }
+
   bet(raceId: number, ponyId: number): Observable<RaceModel> {
     return this.httpClient
       .post<RaceModel>(`${environment.baseUrl}/api/races/${raceId}/bets`, { ponyId });
   }
 
-  get(raceId: number): Observable<RaceModel> {
-    return this.httpClient.get<RaceModel>(`${environment.baseUrl}/api/races/${raceId}`);
+  cancelBet(raceId): Observable<void> {
+    return this.httpClient
+      .delete<void>(`${environment.baseUrl}/api/races/${raceId}/bets`);
   }
 }
