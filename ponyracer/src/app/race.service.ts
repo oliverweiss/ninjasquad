@@ -38,4 +38,10 @@ export class RaceService {
       .takeWhile(race => race.status !== 'FINISHED')
       .map(race => race.ponies);
   }
+
+  boost(raceId: number, ponyId: number ): Observable<void> {
+    return this.httpClient
+      .post<void>(`/api/races/${raceId}/boosts`, { ponyId });
+
+  }
 }
