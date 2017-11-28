@@ -10,6 +10,9 @@ export class PonyComponent implements OnInit {
   @Input()
   ponyModel: PonyModel;
 
+  @Input()
+  isRunning: Boolean;
+
   @Output()
   ponyClicked = new EventEmitter<PonyModel>();
 
@@ -20,7 +23,8 @@ export class PonyComponent implements OnInit {
 
   getPonyImageUrl(): string {
     const color = this.ponyModel.color.toLowerCase();
-    return `assets/images/pony-${color}.gif`;
+    const running = this.isRunning ? '-running' : '';
+    return `assets/images/pony-${color}${running}.gif`;
   }
 
   clicked(): void {

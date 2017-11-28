@@ -7,5 +7,4 @@ export interface RaceModel {
     startInstant: string;
     status?: string;
     betPonyId?: number;
-
 }
