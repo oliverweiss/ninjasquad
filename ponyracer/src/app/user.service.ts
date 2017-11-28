@@ -21,12 +21,12 @@ export class UserService {
 
   register(login, password, birthYear): Observable<UserModel> {
     const body = {login, password, birthYear};
-    return this.httpClient.post<UserModel>(`${environment.baseUrl}/users`, body);
+    return this.httpClient.post<UserModel>(`${environment.baseUrl}/api/users`, body);
   }
 
   authenticate(credentials: CredentialsModel): Observable<UserModel> {
     return this.httpClient
-      .post<UserModel>(`${environment.baseUrl}/users/authentication`, credentials)
+      .post<UserModel>(`${environment.baseUrl}/api/users/authentication`, credentials)
       .do(user => this.storeLoggedInUser(user));
   }
 

@@ -13,6 +13,6 @@ export class RaceService {
 
   list(): Observable<Array<RaceModel>> {
     return this.httpClient
-    .get<Array<RaceModel>>(`${environment.baseUrl}/races`, {params: {status: 'PENDING'}});
+    .get<Array<RaceModel>>(`${environment.baseUrl}/api/races`, {params: {status: 'PENDING'}});
   }
 }
