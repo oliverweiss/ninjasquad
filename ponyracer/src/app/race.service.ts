@@ -13,6 +13,15 @@ export class RaceService {
 
   list(): Observable<Array<RaceModel>> {
     return this.httpClient
-    .get<Array<RaceModel>>(`${environment.baseUrl}/api/races`, {params: {status: 'PENDING'}});
+      .get<Array<RaceModel>>(`${environment.baseUrl}/api/races`, {params: {status: 'PENDING'}});
+  }
+
+  bet(raceId: number, ponyId: number): Observable<RaceModel> {
+    return this.httpClient
+      .post<RaceModel>(`${environment.baseUrl}/api/races/${raceId}/bets`, { ponyId });
+  }
+
+  get(raceId: number): Observable<RaceModel> {
+    return this.httpClient.get<RaceModel>(`${environment.baseUrl}/api/races/${raceId}`);
   }
 }
