@@ -3,5 +3,5 @@ export interface UserModel {
     login: string;
     money: number;
     registratioInstant: Date;
-    token: string;
+    token?: string;
 }

@@ -1,3 +1,10 @@
 .selected {
     border-left: 3px solid green;
-  }
+}
+
+.pony-wrapper{
+  -webkit-transition: margin-left 1s;
+  transition: margin-left 1s;
+  -webkit-transition-timing-function: linear;
+  transition-timing-function: linear;
+}
