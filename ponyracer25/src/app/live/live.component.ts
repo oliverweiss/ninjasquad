@@ -55,9 +55,10 @@ export class LiveComponent implements OnInit, OnDestroy {
         }
       );
     this.clickSubject.groupBy(pony => pony.id, pony => pony.id)
-      .mergeMap(obs => obs.bufferToggle(obs, () => Observable.interval(1000)))
-      .filter(array => array.length >= 5)
-      .throttleTime(1000)
+      .mergeMap(obs => obs
+        .bufferToggle(obs, () => Observable.interval(1000))
+        .filter(array => array.length >= 5)
+        .throttleTime(1000))
       .map(array => array[0])
       .switchMap(ponyId => this.raceService.boost(this.raceModel.id, ponyId).catch(() => Observable.empty()))
       .subscribe(() => {});
