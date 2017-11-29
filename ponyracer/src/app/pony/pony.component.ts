@@ -16,7 +16,6 @@ export class PonyComponent implements OnInit {
   @Input()
   isBoosted: Boolean;
 
-
   @Output()
   ponyClicked = new EventEmitter<PonyModel>();
 

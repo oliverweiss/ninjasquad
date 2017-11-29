@@ -572,6 +572,53 @@ describe('LiveComponent', () => {
     discardPeriodicTasks();
   }));
 
+  fit('should boost different ponies simultaneously', fakeAsync(() => {
+    const fakeActivatedRoute = TestBed.get(ActivatedRoute);
+    fakeActivatedRoute.snapshot = { paramMap: convertToParamMap({ raceId: 1 }) };
+    const race = {
+      id: 1,
+      name: 'Lyon',
+      status: 'RUNNING',
+      ponies: [],
+      startInstant: '2016-02-18T08:02:00Z',
+      betPonyId: 1
+    } as RaceModel;
+    fakeRaceService.get.and.returnValue(Observable.of(race));
+    fakeRaceService.boost.and.returnValue(Observable.of(race));
+
+    const liveComponent = new LiveComponent(fakeRaceService, fakeActivatedRoute);
+    liveComponent.ngOnInit();
+    tick();
+
+    const pony = { id: 1, name: 'Sunny Sunday', color: 'BLUE', position: 10 };
+    const phony = { id: 2, name: 'Merry Monday', color: 'RED', position: 10 };
+
+    // when 5 clicks are emitted in a second for the first pony
+    liveComponent.clickSubject.next(pony);
+    liveComponent.clickSubject.next(pony);
+    liveComponent.clickSubject.next(pony);
+    liveComponent.clickSubject.next(pony);
+    liveComponent.clickSubject.next(pony);
+
+    // and 5 clicks in the same second for the second pony
+    liveComponent.clickSubject.next(phony);
+    liveComponent.clickSubject.next(phony);
+    liveComponent.clickSubject.next(phony);
+    liveComponent.clickSubject.next(phony);
+    liveComponent.clickSubject.next(phony);
+
+    // And we wait 1s
+    tick(1000);
+
+    // then we should call the boost method
+    expect(fakeRaceService.boost.calls.count()).toBe(2);
+    expect(fakeRaceService.boost).toHaveBeenCalledWith(race.id, pony.id);
+    expect(fakeRaceService.boost).toHaveBeenCalledWith(race.id, phony.id);
+    fakeRaceService.boost.calls.reset();
+
+    discardPeriodicTasks();
+  }));
+
   it('should catch a boost error', fakeAsync(() => {
     const fakeActivatedRoute = TestBed.get(ActivatedRoute);
     fakeActivatedRoute.snapshot = { paramMap: convertToParamMap({ raceId: 1 }) };

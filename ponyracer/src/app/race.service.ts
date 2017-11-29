@@ -41,7 +41,7 @@ export class RaceService {
 
   boost(raceId: number, ponyId: number ): Observable<void> {
     return this.httpClient
-      .post<void>(`/api/races/${raceId}/boosts`, { ponyId });
+      .post<void>(`${environment.baseUrl}/api/races/${raceId}/boosts`, { ponyId });
 
   }
 }
