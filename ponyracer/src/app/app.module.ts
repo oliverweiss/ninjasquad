@@ -1,3 +1,4 @@
+import { LoggedInGuard } from './logged-in.guard';
 import { WEBSOCKET, WEBSTOMP } from './app.tokens';
 import { WsService } from './ws.service';
 import { JwtInterceptorService } from './jwt-interceptor.service';
@@ -53,7 +54,8 @@ import { LiveComponent } from './live/live.component';
     {provide: HTTP_INTERCEPTORS, useExisting: JwtInterceptorService, multi: true},
     WsService,
     { provide: WEBSOCKET, useFactory: () => WebSocket },
-    { provide: WEBSTOMP, useFactory: () => Webstomp }
+    { provide: WEBSTOMP, useFactory: () => Webstomp },
+    LoggedInGuard
   ],
   bootstrap: [AppComponent]
 })
