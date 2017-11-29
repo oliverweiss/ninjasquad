@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/takeWhile';
 
-import { RaceModel } from './models/race.model';
+import { RaceModel, RaceStatus } from './models/race.model';
 import { Injectable } from '@angular/core';
 
 
@@ -14,9 +14,9 @@ import { Injectable } from '@angular/core';
 export class RaceService {
   constructor(private httpClient: HttpClient, private wsService: WsService) { }
 
-  list(): Observable<Array<RaceModel>> {
+  list(status: RaceStatus): Observable<Array<RaceModel>> {
     return this.httpClient
-      .get<Array<RaceModel>>(`${environment.baseUrl}/api/races`, {params: {status: 'PENDING'}});
+      .get<Array<RaceModel>>(`${environment.baseUrl}/api/races`, { params: { status } });
   }
 
   get(raceId: number): Observable<RaceModel> {

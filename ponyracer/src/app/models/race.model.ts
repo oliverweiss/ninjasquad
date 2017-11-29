@@ -1,3 +1,4 @@
+import { RaceModel } from './race.model';
 import { PonyModel } from './pony.model';
 
 export interface RaceModel {
@@ -5,6 +6,8 @@ export interface RaceModel {
     ponies: Array<PonyModel>;
     id: number;
     startInstant: string;
-    status?: 'PENDING' | 'RUNNING' | 'FINISHED';
+    status?: RaceStatus;
     betPonyId?: number;
 }
+
+export type RaceStatus = 'PENDING' | 'RUNNING' | 'FINISHED';

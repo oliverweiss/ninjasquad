@@ -10,6 +10,7 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/observable/empty';
+import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
@@ -35,11 +36,10 @@ export class LiveComponent implements OnInit, OnDestroy {
   constructor(private raceService: RaceService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const raceId = +this.route.snapshot.paramMap.get('raceId');
+    this.raceModel = this.route.snapshot.data['race'];
 
     this.positionSubscription =
-      this.raceService.get(raceId)
-        .do(race => { this.raceModel = race; })
+        Observable.of(this.raceModel)
         .filter(race => race.status !== 'FINISHED')
         .switchMap(race => this.raceService.live(race.id))
         .subscribe(
