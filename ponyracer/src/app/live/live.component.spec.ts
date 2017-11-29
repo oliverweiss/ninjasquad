@@ -572,7 +572,7 @@ describe('LiveComponent', () => {
     discardPeriodicTasks();
   }));
 
-  fit('should boost different ponies simultaneously', fakeAsync(() => {
+  it('should boost different ponies simultaneously', fakeAsync(() => {
     const fakeActivatedRoute = TestBed.get(ActivatedRoute);
     fakeActivatedRoute.snapshot = { paramMap: convertToParamMap({ raceId: 1 }) };
     const race = {
