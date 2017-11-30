@@ -1,3 +1,4 @@
+import { MoneyHistoryModel } from './models/money-history.model';
 import { WsService } from './ws.service';
 import { JwtInterceptorService } from './jwt-interceptor.service';
 import { environment } from '../environments/environment';
@@ -53,13 +54,17 @@ export class UserService {
     return !!window.localStorage.getItem(REMEMBER_ME);
   }
 
-  scoreUpdates(userId: number): Observable<UserModel> {
-    return this.wsService.connect(`/player/${userId}`);
-  }
-
   logout() {
     this.userEvents.next(null);
     this.jwtInterceptor.removeJwtToken();
     window.localStorage.removeItem(REMEMBER_ME);
+  }
+
+  scoreUpdates(userId: number): Observable<UserModel> {
+    return this.wsService.connect(`/player/${userId}`);
+  }
+
+  getMoneyHistory(): Observable<Array<MoneyHistoryModel>> {
+    return this.httpClient.get<Array<MoneyHistoryModel>>(`${environment.baseUrl}/api/money/history`);
   }
 }

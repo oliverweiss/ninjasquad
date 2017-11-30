@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
 import { USERS_ROUTES } from './users.routes';
+import { MoneyHistoryComponent } from './money-history/money-history.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { USERS_ROUTES } from './users.routes';
   declarations: [
     RegisterComponent,
     LoginComponent,
+    MoneyHistoryComponent,
   ]
 })
 export class UsersModule { }
