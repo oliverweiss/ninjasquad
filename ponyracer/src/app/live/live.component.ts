@@ -29,7 +29,7 @@ export class LiveComponent implements OnInit, OnDestroy {
   poniesWithPosition: Array<PonyWithPositionModel> = [];
   positionSubscription: Subscription;
   error = false;
-  winners: Array<PonyWithPositionModel>;
+  winners: Array<PonyWithPositionModel> = [];
   betWon: Boolean;
   clickSubject: Subject<PonyWithPositionModel> = new Subject<PonyWithPositionModel>();
 
@@ -38,21 +38,20 @@ export class LiveComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.raceModel = this.route.snapshot.data['race'];
 
-    this.positionSubscription =
-        Observable.of(this.raceModel)
-        .filter(race => race.status !== 'FINISHED')
-        .switchMap(race => this.raceService.live(race.id))
-        .subscribe(
-          ponies => {
-            this.poniesWithPosition = ponies;
-            this.raceModel.status = 'RUNNING';
-          },
-          error => { this.error = true; },
-          () => {
-            this.raceModel.status = 'FINISHED';
-            this.winners = this.poniesWithPosition.filter(pony => pony.position >= 100);
-            this.betWon = this.winners.some(winner => winner.id === this.raceModel.betPonyId);
-          });
+    if (this.raceModel.status !== 'FINISHED') {
+      this.positionSubscription =
+      this.raceService.live(this.raceModel.id).subscribe(
+        ponies => {
+          this.poniesWithPosition = ponies;
+          this.raceModel.status = 'RUNNING';
+        },
+        error => { this.error = true; },
+        () => {
+          this.raceModel.status = 'FINISHED';
+          this.winners = this.poniesWithPosition.filter(pony => pony.position >= 100);
+          this.betWon = this.winners.some(winner => winner.id === this.raceModel.betPonyId);
+        });
+    }
 
     this.clickSubject
       .groupBy(pony => pony.id, pony => pony.id)  // Split the clicks by ponyId

@@ -9,10 +9,10 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class RaceComponent implements OnInit {
   @Input() raceModel: RaceModel;
+  @Input() canBet = true;
 
   constructor() { }
 
   ngOnInit() {
   }
-
 }

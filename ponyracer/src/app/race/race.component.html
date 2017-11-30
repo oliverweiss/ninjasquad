@@ -1,4 +1,4 @@
 <h2>{{ raceModel.name }}</h2>
 <p>{{ raceModel.startInstant | fromNow }}</p>
-<a class="btn btn-primary" [routerLink]="['/races', raceModel.id]">Bet on {{raceModel.name}}</a>
+<a class="btn btn-primary" *ngIf="canBet" [routerLink]="['/races', raceModel.id]">Bet on {{raceModel.name}}</a>
 <pr-pony *ngFor="let pony of raceModel.ponies" [ponyModel]="pony"></pr-pony>
