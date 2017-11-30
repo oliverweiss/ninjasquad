@@ -8,6 +8,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/concat';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/catch';
 
 @Component({
   selector: 'pr-menu',

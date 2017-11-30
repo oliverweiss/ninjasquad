@@ -4,10 +4,10 @@
 
 <div class="text-center">
   <ng-container *ngIf="!user">
-      <a class="btn btn-primary" routerLink="/login">Login</a>
-      <a class="btn btn-primary" routerLink="/register">Register</a>
+      <a class="btn btn-primary" [routerLink]="['/', 'users', 'login']">Login</a>
+      <a class="btn btn-primary" [routerLink]="['/', 'users', 'register']">Register</a>
   </ng-container>
   <ng-container *ngIf="user">
-      <a class="btn btn-primary" routerLink="/races">Races</a>
+      <a class="btn btn-primary" [routerLink]="['/', 'races']">Races</a>
   </ng-container>
 </div>
