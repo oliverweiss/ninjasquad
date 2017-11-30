@@ -1,3 +1,4 @@
+import { SharedModule } from '../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,6 +14,7 @@ import { USERS_ROUTES } from './users.routes';
     ReactiveFormsModule,
     FormsModule,
     RouterModule.forChild(USERS_ROUTES),
+    SharedModule,
   ],
   declarations: [
     RegisterComponent,

@@ -14,11 +14,13 @@ import { FinishedRacesComponent } from './finished-races/finished-races.componen
 import { PendingRacesComponent } from './pending-races/pending-races.component';
 import { RacesComponent } from './races.component';
 import { RACES_ROUTES } from './races.routes';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(RACES_ROUTES)
+    RouterModule.forChild(RACES_ROUTES),
+    SharedModule
   ],
   declarations: [
     RacesComponent,

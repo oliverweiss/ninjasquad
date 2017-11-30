@@ -1,7 +1,7 @@
 <h1>Log in</h1>
 
 <form (ngSubmit)="authenticate()" #loginForm="ngForm">
-  <div class="alert alert-danger" *ngIf="authenticationFailed" >Nope, try again</div>
+  <pr-alert type="danger" *ngIf="authenticationFailed" (close)="reset()">Nope, try again</pr-alert>
   <div class="form-group">
     <label for="login">Login</label>
     <input class="form-control" required name="login" [(ngModel)]="credentials.login" />  

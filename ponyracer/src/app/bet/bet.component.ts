@@ -37,4 +37,8 @@ export class BetComponent implements OnInit {
   isPonySelected(pony: PonyModel): Boolean {
     return this.raceModel.betPonyId && this.raceModel.betPonyId === pony.id;
   }
+
+  reset() {
+    this.betFailed = false;
+  }
 }

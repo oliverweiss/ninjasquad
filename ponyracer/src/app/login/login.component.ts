@@ -25,4 +25,8 @@ export class LoginComponent implements OnInit {
         _ => { this.authenticationFailed = true; }
       );
   }
+
+  reset() {
+    this.authenticationFailed = false;
+  }
 }

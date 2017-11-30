@@ -2,28 +2,28 @@
   <div class="form-group">
       <label for="login" id="login-label">Login</label>
       <input id="login" class="form-control" formControlName="login" type="text">
-      <div *ngIf="loginCtrl.dirty && loginCtrl.hasError('required')">Login is required!</div>
+      <pr-alert *ngIf="loginCtrl.dirty && loginCtrl.hasError('required')" [dismissible]="false">Login is required!</pr-alert>
       <div id="login-length-error" *ngIf="loginCtrl.dirty && loginCtrl.hasError('minlength')">Your login should be at least 3 characters!</div>
   </div>
   <div class="form-group" formGroupName="passwordForm">
     <div>
         <label for="password" id="password-label">Password</label>
         <input id="password" class="form-control" formControlName="password" type="password">
-        <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">Password is required!</div>
+        <pr-alert *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')" [dismissible]="false">Password is required!</pr-alert>
     </div>
     <div>
         <label for="confirm" id="confirm-label">Confirm password</label>
         <input id="confirm" class="form-control" formControlName="confirmPassword" type="password">
-        <div *ngIf="confirmPasswordCtrl.dirty && confirmPasswordCtrl.hasError('required')">Confirm password is required!</div>
+        <pr-alert *ngIf="confirmPasswordCtrl.dirty && confirmPasswordCtrl.hasError('required')" [dismissible]="false">Confirm password is required!</pr-alert>
     </div>
-    <div *ngIf="passwordForm.dirty && passwordForm.hasError('matchingError')" id="password-matching-error">Your password does not match!</div>
+    <pr-alert *ngIf="passwordForm.dirty && passwordForm.hasError('matchingError')" id="password-matching-error" [dismissible]="false">Your password does not match!</pr-alert>
   </div>
   <div class="form-group">
       <label for="birthYear" id="birthYear-label">Birth Year</label>
       <input id="birthYear" class="form-control" formControlName="birthYear" type="number">
-      <div *ngIf="birthYearCtrl.dirty && birthYearCtrl.hasError('required')">Birth year is required!</div>
-      <div *ngIf="birthYearCtrl.dirty && birthYearCtrl.hasError('invalidYear')" id="invalid-year-error">This is not a valid year!</div>
+      <pr-alert *ngIf="birthYearCtrl.dirty && birthYearCtrl.hasError('required')" [dismissible]="false">Birth year is required!</pr-alert>
+      <pr-alert *ngIf="birthYearCtrl.dirty && birthYearCtrl.hasError('invalidYear')" id="invalid-year-error" [dismissible]="false" >This is not a valid year!</pr-alert>
     </div>
   <button type="submit" [disabled]="userForm.invalid" class="btn btn-primary">Let’s go!</button>
-  <div *ngIf="registrationFailed" id="registration-error">Try again with another login.</div>
+  <pr-alert type="danger" *ngIf="registrationFailed" id="registration-error" [dismissible]="false">Try again with another login.</pr-alert>
 </form>
