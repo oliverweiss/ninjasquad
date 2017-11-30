@@ -19,7 +19,6 @@ import { WsService } from './ws.service';
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule,
     RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules })
   ],
   declarations: [
